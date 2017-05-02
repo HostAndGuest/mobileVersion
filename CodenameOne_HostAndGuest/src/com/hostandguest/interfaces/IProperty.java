@@ -5,8 +5,14 @@
  */
 package com.hostandguest.interfaces;
 
+import com.hostandguest.entities.Property;
+import java.util.ArrayList;
+
 /**
  * 
  */
 public interface IProperty {
+    public ArrayList<Property> getAllProperty();
+    public ArrayList<Property> getMyProperty(int currentUser);
+    public void deleteProperty(int propertyId);
 }
