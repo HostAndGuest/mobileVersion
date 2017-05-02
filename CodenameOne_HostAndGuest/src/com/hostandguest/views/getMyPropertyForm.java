@@ -33,10 +33,13 @@ import com.codename1.util.StringUtil;
 import com.hostandguest.entities.Property;
 import com.hostandguest.entities.User;
 import com.hostandguest.services.PropertyService;
+import com.hostandguest.services.UserCourant;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 
@@ -61,10 +64,17 @@ public class getMyPropertyForm {
         Command cmdMy = new Command("My Properties");
         Command cmdAll = new Command("All Properties");
         Command cmdGmap = new Command("H&G Map");
+        Command cmdprofile = new Command("Edit profile");
+        Command cmdchat = new Command("Chat");
+        Command cmddisconnect = new Command("Disconnect");
+
         
         formMyListProp.getToolbar().addCommandToOverflowMenu(cmdMy);
         formMyListProp.getToolbar().addCommandToOverflowMenu(cmdAll);
         formMyListProp.getToolbar().addCommandToOverflowMenu(cmdGmap);
+        formMyListProp.getToolbar().addCommandToOverflowMenu(cmdprofile);
+        formMyListProp.getToolbar().addCommandToOverflowMenu(cmdchat);
+        formMyListProp.getToolbar().addCommandToOverflowMenu(cmddisconnect);
         formMyListProp.addCommandListener(e -> {
            if(e.getCommand() == cmdMy){
            }
@@ -76,6 +86,27 @@ public class getMyPropertyForm {
                GoogleMapForm Gform = new GoogleMapForm(theme);
                Gform.showGoogleMap();
 
+           }
+             if(e.getCommand() == cmdprofile){
+               try {
+                   UserModificationForm usermod = new UserModificationForm();
+                   usermod.showusermodform();
+               } catch (IOException ex) {
+
+               }
+             }
+               if(e.getCommand() == cmdchat){   
+                   ChatList chat = new ChatList() ;
+                   chat.showList();
+           }
+              if(e.getCommand() == cmddisconnect){   
+               try {
+                   UserCourant.setCurrentuser(null);
+                   Loginform log = new Loginform();
+                   log.showloginform();
+               } catch (IOException ex) {
+
+               }
            }
        });
 

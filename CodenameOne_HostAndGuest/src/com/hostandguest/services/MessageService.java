@@ -90,7 +90,9 @@ public class MessageService {
                     ConnectionRequest con = new ConnectionRequest("http://localhost/ScriptsHostAndGuest/getMessages.php?user1="+user1+"&user2="+user2);
                     System.out.println(con.getUrl());
                     NetworkManager.getInstance().addToQueueAndWait(con);
-                    
+                    if(con.getResponseData().toString()!= "Notice: Undefined variable: json in C:\\xampp\\htdocs\\ScriptsHostAndGuest\\getMessages.php on line 37\n" +
+"null"){
+
                     Map<String,Object> response = new JSONParser().parseJSON(new InputStreamReader(
                             new ByteArrayInputStream(con.getResponseData()), "UTF-8"));
                     
@@ -108,6 +110,10 @@ public class MessageService {
                     
                     // making sure there is elements in the list
                     // isEmpty wont work on the list in this case
+                    if (responseContent !=null)
+                    {
+                        
+   
                     if (!responseContent.get(0).isEmpty())
                     {
                         for (Map<String, Object> record : responseContent)
@@ -121,8 +127,10 @@ public class MessageService {
                         }
                     }
                     
+                    }
                     NetworkManager.getInstance().addToQueue(con);
-                    
+                                            
+                    }
                 }
                 catch (IOException ex)
                 {

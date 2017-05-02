@@ -96,12 +96,18 @@ public class ChatList {
             public Container insertMessages(){
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Font smallPlainSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-                
+                 ArrayList<Message> messages ;
                 Container ctn = new Container(new BoxLayout(BoxLayout.Y_AXIS));
                 System.out.println("User.currentUser " + User.currentUser);
                 System.out.println("Message.currentUserConversation " + Message.currentUserConversation);
                 System.out.println("messages size " + ms.getConversation(User.currentUser, Message.currentUserConversation).size());
-                ArrayList<Message> messages = ms.getConversation(User.currentUser, Message.currentUserConversation);
+                if(ms.getConversation(User.currentUser, Message.currentUserConversation) !=null){
+                     
+                    messages = ms.getConversation(User.currentUser, Message.currentUserConversation);
+                }
+                else
+                    messages= new ArrayList<Message>() ;
+                    
                 System.out.println("messages size " + messages.size());
                         Style s = new Style();
                 FontImage img = FontImage.createMaterial(FontImage.MATERIAL_FACE,s );
@@ -186,7 +192,7 @@ public class ChatList {
         }
          };
 
-        timer.schedule(myTask, 2000, 2000);
+        timer.schedule(myTask, 20000, 20000);
     }
     
     public void refresh(){
