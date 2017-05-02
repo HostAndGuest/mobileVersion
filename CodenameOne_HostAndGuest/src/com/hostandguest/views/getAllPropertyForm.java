@@ -33,6 +33,7 @@ import com.codename1.util.StringUtil;
 import com.hostandguest.entities.Message;
 import com.hostandguest.entities.Property;
 import com.hostandguest.entities.User;
+import com.hostandguest.services.MessageService;
 import com.hostandguest.services.PropertyService;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -266,9 +267,13 @@ public class getAllPropertyForm {
         ctn1.add(Desc);ctn1.add(labEquip);ctn1.add(labRnb);
 
         chatButton.addActionListener(f -> {
+            MessageService ms = new MessageService();
             int host_id = s.getHost_id();
             Message.currentUserConversation = host_id;
             System.out.println("Host_Id " + Message.currentUserConversation);
+            ChatList cl = new ChatList();
+            System.out.println(ms.getUsernameById(host_id));
+            cl.displayConversation(ms.getUsernameById(host_id));
         });
         
         bookButton.addActionListener(f -> {

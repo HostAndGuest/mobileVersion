@@ -50,10 +50,13 @@ public class ChatList {
     private Resources theme;
     private MessageService ms;
      String number="";
+     Timer timer;
     public ChatList() {
-       
+         ms = new MessageService();
 
-            ms = new MessageService();
+    }
+    public void showList(){
+
             ArrayList<User> users = ms.getUserList();
         
         listForm =new Form("Mes Discussions",new BoxLayout(BoxLayout.Y_AXIS));
@@ -72,7 +75,7 @@ public class ChatList {
             lblName.getUnselectedStyle().setPaddingLeft(18);
             lblName.addPointerPressedListener(e->{
                 Message.currentUserConversation=s.getId();
-                displayConversation(s);
+                displayConversation(ms.getUsernameById(Message.currentUserConversation));
             });
             ctn1.add(lblName);
 
@@ -80,15 +83,26 @@ public class ChatList {
             listForm.add(ctn1);
         }
 
+            listForm.getToolbar().addCommandToRightBar("Home", null, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                getMyPropertyForm gmf = new getMyPropertyForm(theme, User.currentUser); 
+                gmf.showMyProperties();
+            }
+        });
+                
         listForm.show();
-
     }
             public Container insertMessages(){
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Font smallPlainSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
                 
                 Container ctn = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+                System.out.println("User.currentUser " + User.currentUser);
+                System.out.println("Message.currentUserConversation " + Message.currentUserConversation);
+                System.out.println("messages size " + ms.getConversation(User.currentUser, Message.currentUserConversation).size());
                 ArrayList<Message> messages = ms.getConversation(User.currentUser, Message.currentUserConversation);
+                System.out.println("messages size " + messages.size());
                         Style s = new Style();
                 FontImage img = FontImage.createMaterial(FontImage.MATERIAL_FACE,s );
                 FontImage img2 = FontImage.createMaterial(FontImage.MATERIAL_ACCOUNT_CIRCLE,s );
@@ -113,21 +127,26 @@ public class ChatList {
                     return ctn;
         }
     
-    public void displayConversation(User user){
+    public void displayConversation(String username){
                                     if(Message.currentUserConversation==1){
                 number="+21655002851";
             }
          ctn1 = insertMessages();
+        //ctn1 = new Container();
 
-        conversationForm = new Form("Discussion avec "+user.getUsername(),new BoxLayout(BoxLayout.Y_AXIS));;
+        conversationForm = new Form("Discussion avec "+username,new BoxLayout(BoxLayout.Y_AXIS));;
         Command back = new Command("retour");
 
         conversationForm.getToolbar().addCommandToRightBar("Back", null, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-         listForm.showBack();
+                
+             showList();
+             timer.cancel();
             }
         });
+        
+
         
         TextField messageInput = new TextField();
         messageInput.setHint("write your message");
@@ -159,15 +178,15 @@ public class ChatList {
         conversationForm.add(ctn2);
         conversationForm.show();
         conversationForm.scrollComponentToVisible(send);
-        Timer timer = new Timer();
+        timer = new Timer();
         TimerTask myTask = new TimerTask() {
-    @Override
-    public void run() {
-        refresh();
-    }
-};
+        @Override
+        public void run() {
+            refresh();
+        }
+         };
 
-timer.schedule(myTask, 2000, 2000);
+        timer.schedule(myTask, 2000, 2000);
     }
     
     public void refresh(){
@@ -175,21 +194,7 @@ timer.schedule(myTask, 2000, 2000);
             cn=insertMessages();
             conversationForm.replace(ctn1,cn , null);
             ctn1=cn;
-            conversationForm.refreshTheme();
-            /*
-                LocalNotification n = new LocalNotification();
-n.setId("demo-notification");
-n.setAlertBody("It's time to take a break and look at me");
-n.setAlertTitle("Break Time!");
-n.setAlertSound("beep-01a.mp3");
-
-        Display.getInstance().scheduleLocalNotification(
-        n,
-        System.currentTimeMillis() + 10 * 1000, // fire date/time
-        LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
-
-);
-*/    }
+            conversationForm.refreshTheme();    }
 
     
 }

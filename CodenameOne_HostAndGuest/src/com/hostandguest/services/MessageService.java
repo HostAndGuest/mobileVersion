@@ -39,7 +39,7 @@ public class MessageService {
                 try
                 {
                     
-                    ConnectionRequest con = new ConnectionRequest("http://localhost/host%20n%20guest%20php%20scripts/getUserList.php?userId="+User.currentUser);
+                    ConnectionRequest con = new ConnectionRequest("http://localhost/ScriptsHostAndGuest/getUserList.php?userId="+User.currentUser);
                     NetworkManager.getInstance().addToQueueAndWait(con);
                     
                     Map<String,Object> response = new JSONParser().parseJSON(new InputStreamReader(
@@ -81,11 +81,14 @@ public class MessageService {
     }
 
     public ArrayList<Message> getConversation(int user1, int user2){
+        System.out.println("BGGGGGGGGGGGGGGGGGGGGGGGGGG");
           ArrayList<Message> messages = new ArrayList<Message>();
+          System.out.println("BGGGGGGGGGGGGGGGGGGGGGGGGGG");
                 try
                 {
                     
-                    ConnectionRequest con = new ConnectionRequest("http://localhost/host%20n%20guest%20php%20scripts/getMessages.php?user1="+user1+"&user2="+user2);
+                    ConnectionRequest con = new ConnectionRequest("http://localhost/ScriptsHostAndGuest/getMessages.php?user1="+user1+"&user2="+user2);
+                    System.out.println(con.getUrl());
                     NetworkManager.getInstance().addToQueueAndWait(con);
                     
                     Map<String,Object> response = new JSONParser().parseJSON(new InputStreamReader(
@@ -130,7 +133,7 @@ public class MessageService {
                 return messages;
     }
         public void sendMessage(int sender, int receiver,String body){  
-                    ConnectionRequest con = new ConnectionRequest("http://localhost/host%20n%20guest%20php%20scripts/addMessage.php?sender="+sender+"&receiver="+receiver+"&body="+body);
+                    ConnectionRequest con = new ConnectionRequest("http://localhost/ScriptsHostAndGuest/addMessage.php?sender="+sender+"&receiver="+receiver+"&body="+body);
                     NetworkManager.getInstance().addToQueueAndWait(con);
                    // NetworkManager.getInstance().addToQueue(con);
                     
@@ -146,7 +149,7 @@ public class MessageService {
                 .create();
     }
         public String getUsernameById(int user1d){
-            ConnectionRequest con = new ConnectionRequest("http://localhost/host%20n%20guest%20php%20scripts/getUserById.php?userId="+user1d);
+            ConnectionRequest con = new ConnectionRequest("http://localhost/ScriptsHostAndGuest/getUserById.php?userId="+user1d);
             NetworkManager.getInstance().addToQueueAndWait(con);
              String response = new String (con.getResponseData());
             return response;
