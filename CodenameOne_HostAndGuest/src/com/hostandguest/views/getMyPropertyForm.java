@@ -85,7 +85,6 @@ public class getMyPropertyForm {
            if(e.getCommand() == cmdGmap){
                GoogleMapForm Gform = new GoogleMapForm(theme);
                Gform.showGoogleMap();
-
            }
              if(e.getCommand() == cmdprofile){
                try {

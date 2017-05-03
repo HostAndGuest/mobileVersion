@@ -54,7 +54,7 @@ public class UserModificationForm {
             TextField repeatpasswordfield = new TextField ("", "", 20, TextField.PASSWORD );
             TextField firstnamefield = new TextField ("" );
             TextField lastnamefield = new TextField ("" );
-            Button Submit = new Button (Image.createImage("file:///C:/Users/Asus/Documents/NetBeansProjects/HostAndGuest_mobileVersion/CodenameOne_HostAndGuest/src/ressources/submit.jpg"));
+            Button Submit = new Button (Image.createImage("/submit.jpg"));
             //Button Menu = new Button ("main menu");
             Submit.getUnselectedStyle().setMargin(50, 50, 300, 50);
             Usermodificationform.getUnselectedStyle().setBgColor(999999999,false);
