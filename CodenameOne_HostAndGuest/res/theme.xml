@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource majorVersion="1" minorVersion="7" useXmlUI="false">
+    <image name="angryface.png"  />
+    <image name="anonymous_user.png"  />
+    <image name="avatar.png"  />
+    <image name="chart_0.PNG"  />
+    <image name="chart_1.PNG"  />
+    <image name="chart_10.PNG"  />
+    <image name="chart_2.PNG"  />
+    <image name="chart_3.PNG"  />
+    <image name="chart_4.PNG"  />
+    <image name="chart_5.PNG"  />
+    <image name="chart_6.PNG"  />
+    <image name="chart_7.PNG"  />
+    <image name="chart_8.PNG"  />
+    <image name="chart_9.PNG"  />
+    <image name="happyface.png"  />
+    <image name="pokerface.png"  />
+    <ui name="ReviewAdd" />
+    <ui name="reviewList" />
+    <ui name="reviewModel" />
+    <image name="sadface.png"  />
+    <theme name="Theme">
+        <val key="@includeNativeBool" value="true" />
+    </theme>
+    <image name="undetermined.PNG"  />
+    <image name="userProfilePicture.jpg"  />
+</resource>

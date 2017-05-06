@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="reviewModel" cloudDestinationProperty="reviewModel" scrollVisible="true" scrollableX="true" scrollableY="true" layout="BoxLayout" boxLayoutAxis="Y" >
+  <component type="Container" name="Container3" cloudDestinationProperty="Container3" >
+    <component type="Container" name="Container" cloudDestinationProperty="Container" layout="BoxLayout" boxLayoutAxis="Y" >
+      <component type="ImageViewer" name="ImageViewer" cloudDestinationProperty="ImageViewer" >
+        <custom name="image" type="com.codename1.ui.Image" value="avatar.png" />
+      </component>
+      <component type="Label" name="lblUserName" cloudDestinationProperty="lblUserName" text="User Name" >
+      </component>
+    </component>
+    <component type="Container" name="Container2" cloudDestinationProperty="Container2" layout="BoxLayout" boxLayoutAxis="Y" >
+      <component type="Label" name="lblBknDate" cloudDestinationProperty="lblBknDate" text="Booking Date" >
+      </component>
+      <component type="Label" name="lblCmntDate" cloudDestinationProperty="lblCmntDate" text="Comment Date" >
+      </component>
+    </component>
+  </component>
+  <component type="Container" name="Container7" cloudDestinationProperty="Container7" >
+    <component type="Label" name="lblComment" cloudDestinationProperty="lblComment" text="Comment" >
+    </component>
+  </component>
+  <component type="Container" name="ctnRating" cloudDestinationProperty="ctnRating" layout="BoxLayout" boxLayoutAxis="Y" >
+    <component type="Container" name="Container6" cloudDestinationProperty="Container6" layout="BoxLayout" boxLayoutAxis="X" >
+      <component type="Label" name="Label" cloudDestinationProperty="Label" text="Precision" >
+      </component>
+      <component type="Slider" name="sliderPrecision" cloudDestinationProperty="sliderPQ" text="" increments="1" maxValue="5" renderPercentageOnTop="false" >
+      </component>
+      <component type="Label" name="Label4" cloudDestinationProperty="Label" text="Communication" >
+      </component>
+      <component type="Slider" name="sliderCom" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container4" cloudDestinationProperty="Container4" layout="BoxLayout" boxLayoutAxis="X" >
+      <component type="Label" name="lblPQ" cloudDestinationProperty="Label" text="Price Quality" >
+      </component>
+      <component type="Slider" name="sliderPQ" cloudDestinationProperty="sliderPQ" text="" maxValue="5" >
+      </component>
+      <component type="Label" name="Label3" cloudDestinationProperty="Label" text="Cleanliness" >
+      </component>
+      <component type="Slider" name="sliderClean" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container5" cloudDestinationProperty="Container5" layout="BoxLayout" boxLayoutAxis="X" >
+      <component type="Label" name="lblPos" cloudDestinationProperty="Label" text="Position" >
+      </component>
+      <component type="Slider" name="sliderPos" cloudDestinationProperty="sliderPQ" text="" maxValue="5" >
+      </component>
+    </component>
+  </component>
+  <component type="Container" name="ctnVideo" cloudDestinationProperty="ctnVideo" layout="BorderLayout" borderLayoutAbsoluteCenter="false" >
+  </component>
+  <component type="Container" name="Container8" cloudDestinationProperty="Container8" layout="BoxLayout" boxLayoutAxis="Y" >
+    <component type="Container" name="Container9" cloudDestinationProperty="Container9" layout="BoxLayout" boxLayoutAxis="X" >
+      <component type="ImageViewer" name="ivSatisfaction" cloudDestinationProperty="ivSatisfaction" >
+        <custom name="image" type="com.codename1.ui.Image" value="undetermined.PNG" />
+      </component>
+      <component type="Label" name="Label31" cloudDestinationProperty="Label" text="Mood" >
+      </component>
+      <component type="ImageViewer" name="ivMood" cloudDestinationProperty="ivMood" >
+        <custom name="image" type="com.codename1.ui.Image" value="pokerface.png" />
+      </component>
+    </component>
+  </component>
+  <component type="Container" name="Container1" cloudDestinationProperty="Container1" layout="FlowLayout" flowLayoutFillRows="false" flowLayoutAlign="3" flowLayoutValign="0" >
+    <component type="Button" name="btnDelete" cloudDestinationProperty="btnDelete" text="Delete" toggle="false" >
+    </component>
+  </component>
+</component>

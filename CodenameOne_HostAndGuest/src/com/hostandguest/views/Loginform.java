@@ -6,8 +6,10 @@
 package com.hostandguest.views;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.io.Log;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
@@ -49,13 +51,13 @@ public class Loginform {
         Container ctn2 = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
        
-            Label lblusername = new Label("username : " );
-            Label lblpassword = new Label("password : " );
+            Label lblusername = new Label("Username" );
+            Label lblpassword = new Label("Password" );
             Label hostandgues= new Label("Welcome to Host&Guest" );
            
 
-            TextField usernamefield = new TextField ("","username" );
-            TextField passwordfield = new TextField ("","password",20,TextField.PASSWORD );
+            TextField usernamefield = new TextField ("","Username" );
+            TextField passwordfield = new TextField ("","Password",20,TextField.PASSWORD );
             Button connexion = new Button (Image.createImage("/connect-button.jpg"));
             Button ajout = new Button (Image.createImage("/newaccount.png"));
             Button facebook = new Button (Image.createImage("/facebooklogin.jpg"));
@@ -76,8 +78,8 @@ public class Loginform {
             facebook.getUnselectedStyle().setPadding(0,0,0,0);
             ajout.getUnselectedStyle().setPadding(0,0,0,0);
             connexion.getUnselectedStyle().setPadding(0,0,0,0);
-            lblusername.getUnselectedStyle().setMargin(50, 50, 0, 680);
-            lblpassword.getUnselectedStyle().setMargin(50, 50, 0, 680);
+            lblusername.getUnselectedStyle().setMargin(50, 50, 0, 0);
+            lblpassword.getUnselectedStyle().setMargin(50, 50, 0, 0);
             lblusername.setWidth(10);
             connexion.setWidth(20);
             connexion.setSize(new Dimension(50,50));
@@ -107,19 +109,18 @@ public class Loginform {
                    boolean isvalideaccount = us.loginUser(usernamefield.getText(), passwordfield.getText());
                    if (isvalideaccount)
                    {
-                getMyPropertyForm gmf = new getMyPropertyForm(theme, com.hostandguest.entities.User.currentUser);
-                gmf.showMyProperties();
-                       
+                        getMyPropertyForm gmf = new getMyPropertyForm(theme, com.hostandguest.entities.User.currentUser);
+                        gmf.showMyProperties();
                    }
                     else
-                       System.out.println("bad pass");
+                       Dialog.show("Error", "Incorrect Login/Password", "OK", null);
             });
             ajout.addActionListener(e->{
             try {
                 UserAjoutForm userajout = new UserAjoutForm ();
                 userajout.showajoutform();
             } catch (IOException ex) {
-
+                Log.e(ex);
             }
                 
             });

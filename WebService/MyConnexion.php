@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "hostnguest";
+$dbname = "hng_db_full_project";
 // SETUP MyConnexion
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check MyConnexion

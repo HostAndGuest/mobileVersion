@@ -4,9 +4,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/BEYRAM-BG/Documents/NetBeansProjects/HostAndGuest_mobileVersion/CodenameOne_HostAndGuest/src/com/nullpointers/hostandguest/ApplicationLauncher.java</file>
-            <file>file:/C:/Users/BEYRAM-BG/Documents/NetBeansProjects/HostAndGuest_mobileVersion/CodenameOne_HostAndGuest/src/com/hostandguest/views/GoogleMapForm.java</file>
-            <file>file:/C:/Users/BEYRAM-BG/Documents/NetBeansProjects/HostAndGuest_mobileVersion/CodenameOne_HostAndGuest/src/com/hostandguest/views/addPropertyForm.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/services/PropertyService.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/ReviewList.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/ReviewModel.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/services/UserService.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/services/ReviewService.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/entities/User.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/Loginform.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/RatingSlider.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/util/UserCourant.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/nullpointers/hostandguest/ApplicationLauncher.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/getAllPropertyForm.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/ReviewAdd.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/views/GenerateReviewStats.java</file>
+            <file>file:/C:/Users/Unlucky/Documents/NetBeansProjects/CodenameOne_HostAndGuest_master/src/com/hostandguest/interfaces/IReview.java</file>
         </group>
     </open-files>
 </project-private>

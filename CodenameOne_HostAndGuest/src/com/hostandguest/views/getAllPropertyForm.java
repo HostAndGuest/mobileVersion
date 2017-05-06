@@ -9,6 +9,7 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.InteractionDialog;
 import com.codename1.components.SpanLabel;
+import com.codename1.io.Log;
 import com.codename1.io.Util;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
@@ -44,19 +45,20 @@ import java.util.ArrayList;
  * @author BEYRAM-BG
  */
 public class getAllPropertyForm {
-    Form fromListProp ;
+
+    Form fromListProp;
     ArrayList<Property> arrayProperties = new ArrayList<Property>();
-    EncodedImage encoded ;
+    EncodedImage encoded;
     ArrayList<Property> seatchedProperties = new ArrayList<Property>();
-    
-    public getAllPropertyForm(Resources theme){
+
+    public getAllPropertyForm(Resources theme) {
         UIBuilder ui = new UIBuilder();
-        fromListProp = new Form("H&G - List Properties",BoxLayout.y());
+        fromListProp = new Form("H&G - List Properties", BoxLayout.y());
         try {
             encoded = EncodedImage.create("/loading.png");
-            } catch (IOException ex) {
-            }
-        prepareMenu(theme);
+        } catch (IOException ex) {
+        }
+        new CommonMenu(theme, fromListProp);
         arrayProperties = new PropertyService().getAllProperty();
         cellForRow(theme);
     }
@@ -64,60 +66,64 @@ public class getAllPropertyForm {
     public Form getAllPropertiesForm() {
         return fromListProp;
     }
-    
-    private void cellForRow(Resources theme){
+
+    private void cellForRow(Resources theme) {
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_SEARCH);
-        fab.addActionListener(e->{
+        fab.addActionListener(e -> {
             Label lab = new Label("Set your Location :");
             TextField myTF = new TextField();
             myTF.setHint("Set your Location");
-            Dialog abc = new Dialog();abc.add(lab);
+            Dialog abc = new Dialog();
+            abc.add(lab);
             Button srch = new Button("Search");
             srch.addActionListener(l -> {
                 String loc = myTF.getText();
-                for(Property p : arrayProperties){
-                    if(Util.split(p.getLocation().toLowerCase(), loc.toLowerCase()).length >=2){
+                for (Property p : arrayProperties) {
+                    if (Util.split(p.getLocation().toLowerCase(), loc.toLowerCase()).length >= 2) {
                         seatchedProperties.add(p);
                     }
                 }
                 System.out.println("Searched List Size :" + seatchedProperties.size());
                 arrayProperties = seatchedProperties;
-                fromListProp = new Form("H&G - Search Properties",BoxLayout.y());
+                fromListProp = new Form("H&G - Search Properties", BoxLayout.y());
                 try {
                     encoded = EncodedImage.create("/loading.png");
-                    } catch (IOException ex) {
-                    }
-                prepareMenu(theme);
-                for(Property s : arrayProperties){
+                } catch (IOException ex) {
+                    Log.e(ex);
+                }
+                new CommonMenu(theme, fromListProp);
+                for (Property s : arrayProperties) {
                     fromListProp.add(displayCell(s));
                 }
                 FloatingActionButton reloadFab = FloatingActionButton.createFAB(FontImage.MATERIAL_LIST);
                 reloadFab.bindFabToContainer(fromListProp);
-                reloadFab.addActionListener(j->{
-                    fromListProp = new Form("H&G - List Properties",BoxLayout.y());
+                reloadFab.addActionListener(j -> {
+                    fromListProp = new Form("H&G - List Properties", BoxLayout.y());
                     try {
-                    encoded = EncodedImage.create("/loading.png");
+                        encoded = EncodedImage.create("/loading.png");
                     } catch (IOException ex) {
+                        Log.e(ex);
                     }
-                    
-                    prepareMenu(theme);
+
+                    new CommonMenu(theme, fromListProp);
                     arrayProperties = new PropertyService().getAllProperty();
                     cellForRow(theme);
                     fromListProp.showBack();
                 });
                 fromListProp.show();
             });
-            abc.add(myTF);abc.add(srch);
+            abc.add(myTF);
+            abc.add(srch);
             abc.show();//show dialog.
         });
         fab.bindFabToContainer(fromListProp);
-        for(Property s : arrayProperties){
+        for (Property s : arrayProperties) {
             fromListProp.add(displayCell(s));
         }
     }
-    
-    private Container displayCell(Property s){
-        
+
+    private Container displayCell(Property s) {
+
         Container ctn1 = new Container(new BoxLayout((BoxLayout.Y_AXIS)));
         Container ctn2 = new Container(new BoxLayout((BoxLayout.X_AXIS)));
         Container ctn3 = new Container(new BoxLayout((BoxLayout.Y_AXIS)));
@@ -125,8 +131,8 @@ public class getAllPropertyForm {
         Label labNom = new Label(" Property Id: " + s.getId());
         labNom.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
         ctn3.add(labNom);
-        String loc = s.getLocation() ;
-       /* if(loc.length()>6){
+        String loc = s.getLocation();
+        /* if(loc.length()>6){
             loc = loc.substring(0, Math.min(6, s.getLocation().length())) +"...";
         }*/
         Label labLocation = new Label(" Location :  " + loc);
@@ -136,24 +142,24 @@ public class getAllPropertyForm {
         ctn3.add(labLocation);
         ctn3.add(labPrice);
         Button deleteButton = new Button("Delete");
-        deleteButton.setName("del"+ s.getId());
+        deleteButton.setName("del" + s.getId());
         deleteButton.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
         deleteButton.getStyle().setFgColor(0xFF0033, true);
         Button UpButton = new Button("Update");
         UpButton.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
         UpButton.getStyle().setFgColor(0x009999, true);
-        deleteButton.addActionListener(e->{
-            int idProp = Integer.parseInt( StringUtil.replaceAll(((Button) e.getSource()).getName(),"del",""));
-            new PropertyService().deleteProperty(idProp);         
+        deleteButton.addActionListener(e -> {
+            int idProp = Integer.parseInt(StringUtil.replaceAll(((Button) e.getSource()).getName(), "del", ""));
+            new PropertyService().deleteProperty(idProp);
             System.out.println("Property : " + idProp);
-            ctn1.remove();  
+            ctn1.remove();
         });
         ctn2.add(ctn3);
         ctn2.add(ctn4);
         String firstImg = s.getImagesPath().get(0).toString();
-        Image imgServer = URLImage.createToStorage(encoded, "IMG"+firstImg, "http://localhost/PHPstormProjects/Host_n_Guest/web/images/uploads/" + firstImg );
+        Image imgServer = URLImage.createToStorage(encoded, "IMG" + firstImg, "http://localhost/PHPstormProjects/Host_n_Guest/web/images/uploads/" + firstImg);
         ImageViewer img = new ImageViewer(imgServer);
-        img.addPointerReleasedListener(e ->{
+        img.addPointerReleasedListener(e -> {
             System.out.println("click");
             displayDetail(s);
         });
@@ -162,16 +168,16 @@ public class getAllPropertyForm {
         img.setPreferredSize(dCtn1);
         img.setImageInitialPosition(ImageViewer.IMAGE_FILL);
         ctn1.add(img);
-        ctn1.getStyle().setBorder(Border.createLineBorder(2));     
+        ctn1.getStyle().setBorder(Border.createLineBorder(2));
         ctn1.add(ctn2);
         return ctn1;
     }
-    
-    public void showAllProperties(){
+
+    public void showAllProperties() {
         fromListProp.show();
     }
-    
-    private void prepareMenu(Resources theme){
+
+    private void prepareMenu(Resources theme) {
         Command cmdMy = new Command("My Properties");
         Command cmdAll = new Command("All Properties");
         Command cmdGmap = new Command("H&G - Map");
@@ -179,19 +185,19 @@ public class getAllPropertyForm {
         fromListProp.getToolbar().addCommandToOverflowMenu(cmdAll);
         fromListProp.getToolbar().addCommandToOverflowMenu(cmdGmap);
         fromListProp.addCommandListener(e -> {
-           if(e.getCommand() == cmdAll){
-           } 
-           if(e.getCommand() == cmdMy){
-               getMyPropertyForm MyPropForm = new getMyPropertyForm(theme,User.currentUser);
-               MyPropForm.showMyProperties();
-           }
-           if(e.getCommand() == cmdGmap){
-               GoogleMapForm Gform = new GoogleMapForm(theme);
-               Gform.showGoogleMap();
-           }
-       });
+            if (e.getCommand() == cmdAll) {
+            }
+            if (e.getCommand() == cmdMy) {
+                getMyPropertyForm MyPropForm = new getMyPropertyForm(theme, User.currentUser);
+                MyPropForm.showMyProperties();
+            }
+            if (e.getCommand() == cmdGmap) {
+                GoogleMapForm Gform = new GoogleMapForm(theme);
+                Gform.showGoogleMap();
+            }
+        });
     }
-    
+
     private void displayDetail(Property s) {
         Container ctn1 = new Container(new BoxLayout((BoxLayout.Y_AXIS)));
         Container ctnImgs = new Container(new BoxLayout((BoxLayout.X_AXIS)));
@@ -203,18 +209,18 @@ public class getAllPropertyForm {
         try {
             cmdBack.setIcon(EncodedImage.create("/back.png"));
         } catch (IOException ex) {
-            
+
         }
-       // detail.addCommand(cmdBack);
+        // detail.addCommand(cmdBack);
         detail.getToolbar().addCommandToRightBar(cmdBack);
         detail.addCommandListener(e -> {
-           if(e.getCommand() == cmdBack){
-               fromListProp.showBack();
-           }
-       });
-        for(Object o : s.getImagesPath()){
+            if (e.getCommand() == cmdBack) {
+                fromListProp.showBack();
+            }
+        });
+        for (Object o : s.getImagesPath()) {
             String firstImg = o.toString();
-            Image imgServer = URLImage.createToStorage(encoded, "img"+firstImg, "http://localhost/PHPstormProjects/Host_n_Guest/web/images/uploads/" + firstImg );
+            Image imgServer = URLImage.createToStorage(encoded, "img" + firstImg, "http://localhost/PHPstormProjects/Host_n_Guest/web/images/uploads/" + firstImg);
             ImageViewer img = new ImageViewer(imgServer);
             Dimension dCtn1 = new Dimension();
             dCtn1.setHeight(500);
@@ -222,19 +228,20 @@ public class getAllPropertyForm {
             img.setPreferredSize(dCtn1);
             img.setImageInitialPosition(ImageViewer.IMAGE_FILL);
             img.getStyle().setMarginLeft(20);
-            ctnImgs.add(img); 
+            ctnImgs.add(img);
         }
         Container Desc = new Container(new BoxLayout((BoxLayout.X_AXIS)));
         Label labLocation = new Label(" Location :  " + s.getLocation());
         Label labPrice = new Label(" Price :  " + s.getPrice() + " TND");
-        Label labNom = new Label(" Publication date : " + new SimpleDateFormat("dd/MM/yyyy").format(s.getPublicationDate()));   
-        Label labHost = new Label(" Host Id : " + s.getHost_id()); 
-        SpanLabel labDesc = new SpanLabel(" Description : " + s.getDescription()); 
+        Label labNom = new Label(" Publication date : " + new SimpleDateFormat("dd/MM/yyyy").format(s.getPublicationDate()));
+        Label labHost = new Label(" Host Id : " + s.getHost_id());
+        SpanLabel labDesc = new SpanLabel(s.getDescription());
         Label lb = new Label(" Description : ");
-        Desc.add(lb);Desc.add(labDesc);
+        Desc.add(lb);
+        Desc.add(labDesc);
         labDesc.setScrollVisible(true);
-        Label labEquip = new Label(" Equipement : " + s.getEquipements().toString()); 
-        Label labRnb = new Label(" Room number : " + s.getNbRooms()); 
+        Label labEquip = new Label(" Equipement : " + s.getEquipements().toString());
+        Label labRnb = new Label(" Room number : " + s.getNbRooms());
         labLocation.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
         labNom.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
         labPrice.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
@@ -253,18 +260,39 @@ public class getAllPropertyForm {
         ctn1.add(ctnImgs);
         Container ctnButt = new Container(new BoxLayout((BoxLayout.X_AXIS)));
         ctnButt.getStyle().setMarginLeft(20);
-        Label labC = new Label("Contact");labC.getStyle().setMarginBottom(10);
+        Label labC = new Label("Contact");
+        labC.getStyle().setMarginBottom(10);
         labC.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE));
         FloatingActionButton chatButton = FloatingActionButton.createFAB(FontImage.MATERIAL_CHAT);
-        ctnButt.add(chatButton);ctnButt.add(labC);
-        Label labR = new Label("Book");labR.getStyle().setMarginBottom(10);
+        ctnButt.add(chatButton);
+        ctnButt.add(labC);
+        Label labR = new Label("Book");
+        labR.getStyle().setMarginBottom(10);
         labR.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE));
-        FloatingActionButton bookButton = FloatingActionButton.createFAB(FontImage.MATERIAL_SAVE);
-        ctnButt.add(bookButton);ctnButt.add(labR);
+        FloatingActionButton bookButton = FloatingActionButton.createFAB(FontImage.MATERIAL_LIBRARY_BOOKS);
+        ctnButt.add(bookButton);
+        ctnButt.add(labR);
+        Label labGift = new Label("Gifts");
+        labGift.getStyle().setMarginBottom(10);
+        labGift.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE));
+        FloatingActionButton giftsListButton = FloatingActionButton.createFAB(FontImage.MATERIAL_CARD_GIFTCARD);
+        ctnButt.add(giftsListButton);
+        ctnButt.add(labGift);
+        Label labRv = new Label("Reviews");
+        labRv.getStyle().setMarginBottom(10);
+        labRv.getStyle().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE));
+        FloatingActionButton reviewsButton = FloatingActionButton.createFAB(FontImage.MATERIAL_FEEDBACK);
+        ctnButt.add(reviewsButton);
+        ctnButt.add(labRv);
         ctn1.add(ctnButt);
         ctn1.add(lb1);
-        ctn1.add(labLocation);ctn1.add(labPrice);ctn1.add(labNom);ctn1.add(labHost);
-        ctn1.add(Desc);ctn1.add(labEquip);ctn1.add(labRnb);
+        ctn1.add(labLocation);
+        ctn1.add(labPrice);
+        ctn1.add(labNom);
+        ctn1.add(labHost);
+        ctn1.add(Desc);
+        ctn1.add(labEquip);
+        ctn1.add(labRnb);
 
         chatButton.addActionListener(f -> {
             MessageService ms = new MessageService();
@@ -275,16 +303,25 @@ public class getAllPropertyForm {
             System.out.println(ms.getUsernameById(host_id));
             cl.displayConversation(ms.getUsernameById(host_id));
         });
-        
+
         bookButton.addActionListener(f -> {
-            int idProp = s.getId();
-            System.out.println("Property Id " + idProp);
+            new AddBooking(s.getId(), s.getPrice(), s.getNbRooms(), detail).getFormAdd().show();
         });
+        
+        giftsListButton.addActionListener(f -> {
+            new UserBookingList__PropertyGiftList(s.getId(), true, detail).getFormList().show();
+        });
+        
+        reviewsButton.addActionListener(f -> {
+            int idProp = s.getId();
+            new ReviewList(idProp, detail).getFormList().show();
+        });
+        
+        detail.setScrollableX(true);
         
         detail.add(ctn1);
         detail.getStyle().setAlignment(Component.CENTER);
         detail.show();
     }
-        
     
 }

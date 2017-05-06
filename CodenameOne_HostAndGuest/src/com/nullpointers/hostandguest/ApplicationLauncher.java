@@ -1,5 +1,6 @@
 package com.nullpointers.hostandguest;
 
+import com.codename1.io.Log;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
@@ -42,7 +43,7 @@ public class ApplicationLauncher {
             log = new Loginform();
             log.showloginform();
         } catch (IOException ex) {
-
+            Log.e(ex);
         }
 
     }

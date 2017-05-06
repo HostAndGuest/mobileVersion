@@ -71,7 +71,7 @@ public class GoogleMapForm {
         Container root = LayeredLayout.encloseIn(
                 BorderLayout.center(cnt)
         );
-        prepareMenu(theme);
+        new CommonMenu(theme, currentMap);
         currentMap.add(BorderLayout.CENTER, root);
 
     }

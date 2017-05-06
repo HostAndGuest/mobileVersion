@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="ReviewAdd" cloudDestinationProperty="ReviewAdd" layout="FlowLayout" flowLayoutFillRows="false" flowLayoutAlign="1" flowLayoutValign="0" >
+  <component type="Container" name="Container" cloudDestinationProperty="Container" layout="BoxLayout" boxLayoutAxis="Y" >
+    <component type="Container" name="Container2" cloudDestinationProperty="Container2" layout="FlowLayout" flowLayoutFillRows="false" flowLayoutAlign="4" flowLayoutValign="4" >
+      <component type="Label" name="Label2" cloudDestinationProperty="Label2" text="Write Your Review" verticalAlignment="4" textPosition="1" >
+      </component>
+    </component>
+    <component type="Label" name="Label" cloudDestinationProperty="Label" text="_______________________________________" >
+    </component>
+    <component type="TextArea" name="txtComment" cloudBoundProperty="text" cloudDestinationProperty="TextArea" text="" hint="Comment" columns="1" >
+    </component>
+    <component type="Container" name="Container1" cloudDestinationProperty="Container1" >
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="Price Quality    " >
+      </component>
+      <component type="Slider" name="sliderPQ" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container11" cloudDestinationProperty="Container1" >
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="Communication" >
+      </component>
+      <component type="Slider" name="sliderCom" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container12" cloudDestinationProperty="Container1" >
+      <component type="Label" name="lblPosition" cloudDestinationProperty="Label1" text="Position            " >
+      </component>
+      <component type="Slider" name="sliderPos" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container13" cloudDestinationProperty="Container1" >
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="Precision          " >
+      </component>
+      <component type="Slider" name="sliderPrecision" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="Container" name="Container14" cloudDestinationProperty="Container1" >
+      <component type="Label" name="Label1" cloudDestinationProperty="Label1" text="Cleanliness      " >
+      </component>
+      <component type="Slider" name="sliderClean" cloudDestinationProperty="sliderPQ" text="" >
+      </component>
+    </component>
+    <component type="ComboBox" name="cbBookings" cloudDestinationProperty="cbBookings" >
+    </component>
+    <component type="Button" name="btnUploadVid" cloudDestinationProperty="btnUploadVid" text="Upload Video" >
+    </component>
+    <component type="Button" name="btnSubmit" cloudDestinationProperty="btnSubmit" flatten="false" text="Submit Review" gap="2" >
+    </component>
+  </component>
+</component>
